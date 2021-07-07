@@ -11,14 +11,13 @@ class ProductRepository:
         self.products.append(product)
 
     def find(self, product_name: str):
-        p_obj = [el for el in self.products if el.name == product_name][0]
-        return p_obj
+        product = [el for el in self.products if el.name == product_name][0]
+        return product
 
-    def remove(self, product_name:str):
-
-        for p_obj in self.products:
-            if p_obj.name == product_name:
-                self.products.remove(p_obj)
+    def remove(self, product_name: str):
+        for product in self.products:
+            if product.name == product_name:
+                self.products.remove(product)
 
     def __repr__(self):
         result = []
