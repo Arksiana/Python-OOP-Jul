@@ -7,6 +7,6 @@ class Product:
         if self.quantity >= quantity:
             self.quantity -= quantity
 
-    def increase(self,quantity: int):
+    def increase(self, quantity: int):
         self.quantity += quantity
 
