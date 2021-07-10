@@ -44,7 +44,7 @@ class Zoo:
     def tend_animals(self):
         amount = 0
         for animal in self.animals:
-            amount += animal.get_needs()
+            amount += animal.money_for_care
         if self.__budget >= amount:
             self.__budget -= amount
             return f"You tended all the animals. They are happy. Budget left: {self.__budget}"
