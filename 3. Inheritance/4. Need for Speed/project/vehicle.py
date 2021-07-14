@@ -7,5 +7,5 @@ class Vehicle:
         self.fuel_consumption = self.DEFAULT_FUEL_CONSUMPTION
 
     def drive(self, kilometers):
-        if self.fuel - kilometers * self.fuel_consumption >= 0:
+        if self.fuel >= kilometers * self.fuel_consumption:
             self.fuel -= kilometers * self.fuel_consumption
