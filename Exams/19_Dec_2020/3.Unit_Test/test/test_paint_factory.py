@@ -1,66 +1,125 @@
-# TODO 75/100
-
 from unittest import TestCase, main
 from project.factory.paint_factory import PaintFactory
 
-class TestPaintFactory(TestCase):
 
-    def setUp(self):
-        self.paint_factory = PaintFactory('Factory', 50)
+class PaintFactoryTests(TestCase):
+    def setUp(self) -> None:
+        self.paint_factory = PaintFactory(name='FactoryName', capacity=10)
 
-    def test_initial_atributtes(self):
-        self.assertEqual('Factory', self.paint_factory.name)
-        self.assertEqual(50, self.paint_factory.capacity)
-        # self.assertListEqual(["white", "yellow", "blue", "green", "red"], self.paint_factory.valid_ingredients)
-        self.assertDictEqual({}, self.paint_factory.ingredients)
-        self.assertDictEqual({}, self.paint_factory.products)
+    def test_new_factory_can_be_instantiated(self):
+        p_factory = PaintFactory(name='FactoryName', capacity=10)
+        self.assertEqual('FactoryName', p_factory.name)
+        self.assertEqual(10, p_factory.capacity)
 
-    def test_add_method_invalid_ingredient(self):
-        with self.assertRaises(TypeError) as context:
-            self.paint_factory.add_ingredient('orange', 20)
-        self.assertEqual("Ingredient of type orange not allowed in PaintFactory", str(context.exception))
+    def test_factory_cannot_add_wrong_ingredient(self):
+        i_type = 'brown'
+        i_quantity = 5
+        message = "Ingredient of type brown not allowed in PaintFactory"
+        with self.assertRaises(TypeError) as e:
+            self.paint_factory.add_ingredient(i_type, i_quantity)
+        self.assertEqual(message, str(e))
 
-    def test_add_method_invalid_quantity(self):
-        with self.assertRaises(ValueError) as context:
-            self.paint_factory.add_ingredient('green', 55)
-        self.assertEqual("Not enough space in factory", str(context.exception))
+    def test_factory_cannot_add_valid_ingredient_over_capacity(self):
+        i_type = 'white'
+        i_quantity = 20
+        message = "Not enough space in factory"
+        with self.assertRaises(ValueError) as e:
+            self.paint_factory.add_ingredient(
+                i_type, i_quantity)
+        self.assertEqual(message, str(e))
 
-    def test_add_method_valid_ingredient_and_quantity(self):
-        self.paint_factory.add_ingredient('green', 25)
-        self.paint_factory.add_ingredient('white', 25)
-        self.assertEqual({'green': 25, 'white': 25}, self.paint_factory.ingredients)
+    def test_factory_adds_valid_ingredient_with_valid_quantity(self):
+        i_type = 'white'
+        i_quantity = 5
+        products = {i_type: i_quantity}
 
-    def test_remove_method_invalid_ingredient(self):
-        with self.assertRaises(KeyError) as context:
-            self.paint_factory.remove_ingredient('orange', 20)
-        self.assertEqual("No such ingredient in the factory", context.exception.args[0])
+        self.paint_factory.add_ingredient(i_type, i_quantity)
 
-    def test_remove_method_invalid_quantity(self):
-        self.paint_factory.add_ingredient('green', 25)
-        with self.assertRaises(ValueError) as context:
-            self.paint_factory.remove_ingredient('green', 30)
-        self.assertEqual("Ingredients quantity cannot be less than zero", str(context.exception))
+        self.assertEqual(products, self.paint_factory.products)
 
-    def test_remove_method_valid_ingredient_and_quantity(self):
-        self.paint_factory.add_ingredient('green', 25)
-        self.paint_factory.remove_ingredient('green', 25)
-        self.assertEqual({'green': 0}, self.paint_factory.ingredients)
+    def test_factory_adds_аnother_valid_ingredient_with_valid_quantity(self):
+        i_type1 = 'white'
+        i_type2 = 'yellow'
 
-    def test_products_property(self):
-        self.paint_factory.add_ingredient('green', 25)
-        self.paint_factory.add_ingredient('white', 25)
-        self.assertEqual({'green': 25, 'white': 25}, self.paint_factory.ingredients)
+        quantity = 5
+        products = {i_type1: quantity, i_type2: quantity}
 
-    def test_can_add_method_false_from_base_class(self):
-        self.paint_factory.add_ingredient('green', 20)
-        self.paint_factory.add_ingredient('white', 20)
-        self.assertTrue(self.paint_factory.can_add(10))
+        self.paint_factory.add_ingredient(
+            i_type1, quantity)
 
-    def test_can_add_method_true_from_base_class(self):
-        self.paint_factory.add_ingredient('green', 25)
-        self.paint_factory.add_ingredient('white', 25)
-        self.assertFalse(self.paint_factory.can_add(10))
+        self.paint_factory.add_ingredient(
+            i_type2, quantity)
+
+        self.assertEqual(products, self.paint_factory.products)
+
+    def test_factory_can_wrongly_add_аnother_valid_ingredient_after_capacity_is_over(self):
+        i_type1 = 'white'
+        i_type2 = 'yellow'
+        i_type3 = 'blue'
+
+        quantity = 5
+        products = {i_type1: quantity, i_type2: quantity, i_type3: quantity}
+
+        self.paint_factory.add_ingredient(i_type1, quantity)
+
+        self.paint_factory.add_ingredient(
+            i_type2, quantity)
+
+        self.assertEqual(False, self.paint_factory.can_add(quantity))
+
+        self.paint_factory.add_ingredient(
+            i_type3, quantity)
+
+        self.assertEqual(products, self.paint_factory.products)
+
+    def test_factory_cannot_remove_invalid_ingredient(self):
+        i_type1 = 'white'
+        i_type2 = 'yellow'
+        quantity = 5
+        message = "No such product in the factory"
+
+        self.paint_factory.add_ingredient(
+            i_type1, quantity)
+
+        self.paint_factory.add_ingredient(
+            i_type2, quantity)
+
+        with self.assertRaises(KeyError) as e:
+            self.paint_factory.remove_ingredient('red', 5)
+            self.assertEqual(message, str(e))
+
+    def test_factory_cannot_remove_more_than_ingredient_quantity(self):
+        i_type1 = 'white'
+        i_type2 = 'yellow'
+        quantity = 5
+        message = "Ingredient quantity cannot be less than zero"
+
+        self.paint_factory.add_ingredient(
+            i_type1, quantity)
+
+        self.paint_factory.add_ingredient(
+            i_type2,quantity)
+
+        with self.assertRaises(ValueError) as e:
+            self.paint_factory.remove_ingredient('white', 10)
+            self.assertEqual(message, str(e))
+
+    def test_factory_removes_valid_ingredient_with_valid_quantity(self):
+        i_type1 = 'white'
+        i_type2 = 'yellow'
+        quantity = 5
+        products = {i_type1: 1, i_type2: quantity}
+
+        self.paint_factory.add_ingredient(
+            i_type1, quantity)
+
+        self.paint_factory.add_ingredient(
+            i_type2, quantity)
+
+        self.paint_factory.remove_ingredient('white', 4)
+
+        self.assertEqual(products, self.paint_factory.products)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

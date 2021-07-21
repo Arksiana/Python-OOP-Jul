@@ -1,6 +1,3 @@
-# TODO 144/150
-
-
 from project.medicine.medicine import Medicine
 from project.supply.food_supply import FoodSupply
 from project.supply.supply import Supply
@@ -25,7 +22,7 @@ class Bunker:
     def water(self):
         result = [el for el in self.survivors if el.__class__.__name__ == 'WaterSupply']
         if not result:
-            return IndexError("There are no water supplies left!")
+            raise IndexError("There are no water supplies left!")
         return result
 
     @property
@@ -70,7 +67,7 @@ class Bunker:
                     return f"{survivor.name} sustained successfully with {sustenance_type}"
 
     def next_day(self):
-        for s in self.survivors:
-            s.needs -= s.age * 2
-            f, w = self.food.pop(), self.water.pop()
-            f.apply(s), w.apply(s)
+        for survivor in self.survivors:
+            survivor.needs -= survivor.age * 2
+            FoodSupply().apply(survivor)
+            WaterSupply().apply(survivor)
