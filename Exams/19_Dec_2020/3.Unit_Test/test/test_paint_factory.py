@@ -33,7 +33,7 @@ class TestPaintFactory(TestCase):
     def test_remove_method_invalid_ingredient(self):
         with self.assertRaises(KeyError) as context:
             self.paint_factory.remove_ingredient('orange', 20)
-        self.assertEqual("No such product in the factory", context.exception.args[0])
+        self.assertEqual("No such ingredient in the factory", context.exception.args[0])
 
     def test_remove_method_invalid_quantity(self):
         self.paint_factory.add_ingredient('green', 25)

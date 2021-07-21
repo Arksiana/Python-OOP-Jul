@@ -23,9 +23,12 @@ class PaintFactory(Factory):
             else:
                 raise ValueError("Ingredients quantity cannot be less than zero")
         else:
-            raise KeyError("No such product in the factory")
+            raise KeyError("No such ingredient in the factory")
 
     @property
     def products(self):
         return self.ingredients
 
+from project.factory.paint_factory import PaintFactory
+class Test:
+   pass
