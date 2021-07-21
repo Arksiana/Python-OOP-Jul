@@ -37,13 +37,11 @@ class Truck(Vehicle):
         self.fuel_quantity += fuel * 0.95
 
 
-
 car = Car(20, 5)
 car.drive(3)
 print(car.fuel_quantity)
 car.refuel(10)
 print(car.fuel_quantity)
-
 
 truck = Truck(100, 15)
 truck.drive(5)

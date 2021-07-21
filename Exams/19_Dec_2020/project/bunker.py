@@ -70,7 +70,7 @@ class Bunker:
                     return f"{survivor.name} sustained successfully with {sustenance_type}"
 
     def next_day(self):
-        for survivor in self.survivors:
-            survivor.needs -= survivor.age * 2
-            FoodSupply().apply(survivor)
-            WaterSupply().apply(survivor)
+        for s in self.survivors:
+            s.needs -= s.age * 2
+            f, w = self.food.pop(), self.water.pop()
+            f.apply(s), w.apply(s)

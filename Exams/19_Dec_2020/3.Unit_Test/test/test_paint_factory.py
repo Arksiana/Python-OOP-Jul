@@ -6,10 +6,10 @@ from project.factory.paint_factory import PaintFactory
 class TestPaintFactory(TestCase):
 
     def setUp(self):
-        self.paint_factory = PaintFactory('Slatina', 50)
+        self.paint_factory = PaintFactory('Factory', 50)
 
     def test_initial_atributtes(self):
-        self.assertEqual('Slatina', self.paint_factory.name)
+        self.assertEqual('Factory', self.paint_factory.name)
         self.assertEqual(50, self.paint_factory.capacity)
         # self.assertListEqual(["white", "yellow", "blue", "green", "red"], self.paint_factory.valid_ingredients)
         self.assertDictEqual({}, self.paint_factory.ingredients)
@@ -39,7 +39,7 @@ class TestPaintFactory(TestCase):
         self.paint_factory.add_ingredient('green', 25)
         with self.assertRaises(ValueError) as context:
             self.paint_factory.remove_ingredient('green', 30)
-        self.assertEqual("Ingredient quantity cannot be less than zero", str(context.exception))
+        self.assertEqual("Ingredients quantity cannot be less than zero", str(context.exception))
 
     def test_remove_method_valid_ingredient_and_quantity(self):
         self.paint_factory.add_ingredient('green', 25)
