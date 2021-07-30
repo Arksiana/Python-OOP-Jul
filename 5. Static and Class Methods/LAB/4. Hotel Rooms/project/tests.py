@@ -23,14 +23,14 @@ class Tests(unittest.TestCase):
         result = self.room.take_room(4)
         self.assertEqual(self.room.is_taken, False)
         self.assertEqual(self.room.guests, 0)
-        self.assertEqual(result, "Room number 1 cannot be taken")
+        self.assertEqual(result, "Room number Test_Worker cannot be taken")
 
     def test_take_room_not_free(self):
         self.room.take_room(1)
         result = self.room.take_room(1)
         self.assertEqual(self.room.is_taken, True)
         self.assertEqual(self.room.guests, 1)
-        self.assertEqual(result, "Room number 1 cannot be taken")
+        self.assertEqual(result, "Room number Test_Worker cannot be taken")
 
     def test_free_room_success(self):
         self.room.take_room(1)
@@ -42,7 +42,7 @@ class Tests(unittest.TestCase):
         result = self.room.free_room()
         self.assertEqual(self.room.is_taken, False)
         self.assertEqual(self.room.guests, 0)
-        self.assertEqual(result, "Room number 1 is not taken")
+        self.assertEqual(result, "Room number Test_Worker is not taken")
 
     def test_init_creates_all_attributes(self):
         self.assertEqual(self.hotel.name, "Some Hotel")
@@ -80,7 +80,7 @@ class Tests(unittest.TestCase):
         self.hotel.add_room(room)
         self.hotel.take_room(1, 3)
         res = self.hotel.status().strip()
-        actual = 'Hotel Some Hotel has 3 total guests\nFree rooms: \nTaken rooms: 1'
+        actual = 'Hotel Some Hotel has 3 total guests\nFree rooms: \nTaken rooms: Test_Worker'
         self.assertEqual(res, actual)
 
 

@@ -24,7 +24,7 @@ class Account:
     # def __next__(self):
     #     if self.index < len(self._transactions):
     #         return self._transactions[self.index]
-    #     self.index += 1
+    #     self.index += Test_Worker
 
     def __getitem__(self, index):
         return self._transactions[index]

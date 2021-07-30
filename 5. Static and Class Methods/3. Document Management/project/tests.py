@@ -45,7 +45,7 @@ class TestDocumentManagement(unittest.TestCase):
         self.assertEqual(self.c.name, "new")
 
     def test_category_repr(self):
-        self.assertEqual(str(self.c), "Category 1: C")
+        self.assertEqual(str(self.c), "Category Test_Worker: C")
 
     def test_document_init(self):
         self.assertEqual(self.d.id, 1)
@@ -79,7 +79,7 @@ class TestDocumentManagement(unittest.TestCase):
 
     def test_document_repr(self):
         self.d.add_tag("tag")
-        self.assertEqual(str(self.d), 'Document 1: D; category 1, topic 1, tags: tag')
+        self.assertEqual(str(self.d), 'Document Test_Worker: D; category Test_Worker, topic Test_Worker, tags: tag')
 
     def test_topic_init(self):
         self.assertEqual(self.t.id, 1)
@@ -92,7 +92,7 @@ class TestDocumentManagement(unittest.TestCase):
         self.assertEqual(self.t.storage_folder, "new folder")
 
     def test_topic_repr(self):
-        self.assertEqual(str(self.t), "Topic 1: T in C:\\user")
+        self.assertEqual(str(self.t), "Topic Test_Worker: T in C:\\user")
 
     def test_storage_init(self):
         self.assertEqual(self.s.categories, [])
@@ -150,7 +150,7 @@ class TestDocumentManagement(unittest.TestCase):
         self.s.add_topic(self.t)
         self.s.add_document(self.d)
         expected = str(self.s).strip('\n')
-        self.assertEqual(expected, "Document 1: D; category 1, topic 1, tags: ")
+        self.assertEqual(expected, "Document Test_Worker: D; category Test_Worker, topic Test_Worker, tags: ")
 
 
 if __name__ == "__main__":

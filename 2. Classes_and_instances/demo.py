@@ -42,4 +42,4 @@ print(margarita.remove_ingredient('tomatoes', 2, 0.5))
 margarita.remove_ingredient('cheese', 2, 1)
 print(margarita.make_order())
 print(margarita.add_extra('cheese', 1, 1))
-# 11+ 0.5 + 1 – 1 - 1
+# 11+ 0.5 + Test_Worker – Test_Worker - Test_Worker

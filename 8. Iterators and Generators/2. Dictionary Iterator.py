@@ -17,6 +17,6 @@ class dictionary_iter:
         return key, value
 
 
-result = dictionary_iter({1: "1", 2: "2"})
+result = dictionary_iter({1: "Test_Worker", 2: "2"})
 for x in result:
     print(x)

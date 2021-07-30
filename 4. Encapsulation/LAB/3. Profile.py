@@ -12,7 +12,7 @@ class Profile:
         count_upper = len([el for el in value if el.isupper()])
         count_dig = len([el for el in value if el.isdigit()])
         if len(value) < 8 or count_upper == 0 or count_dig == 0:
-            raise ValueError("The password must be 8 or more characters with at least 1 digit and 1 uppercase letter.")
+            raise ValueError("The password must be 8 or more characters with at least Test_Worker digit and Test_Worker uppercase letter.")
         self.__password = value
 
     @property

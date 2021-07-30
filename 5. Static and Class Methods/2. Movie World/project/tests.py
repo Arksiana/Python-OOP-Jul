@@ -14,7 +14,7 @@ class TestsMovieWorld(unittest.TestCase):
 
     def test_customer_repr(self):
         c = Customer("Pesho", 22, 1)
-        self.assertEqual(repr(c), "1: Pesho of age 22 has 0 rented DVD's ()")
+        self.assertEqual(repr(c), "Test_Worker: Pesho of age 22 has 0 rented DVD's ()")
 
     def test_dvd_init(self):
         dvd = DVD("B", 1, 2020, "January", 10)
@@ -36,7 +36,7 @@ class TestsMovieWorld(unittest.TestCase):
 
     def test_dvd_repr(self):
         dvd = DVD.from_date(1, "A", "16.10.1997", 18)
-        self.assertEqual(repr(dvd), "1: A (October 1997) has age restriction 18. Status: not rented")
+        self.assertEqual(repr(dvd), "Test_Worker: A (October 1997) has age restriction 18. Status: not rented")
 
     def test_movie_init(self):
         movie = MovieWorld("Test")
@@ -145,7 +145,7 @@ class TestsMovieWorld(unittest.TestCase):
         movie_world.add_dvd(d)
         movie_world.rent_dvd(4, 1)
         actual = repr(movie_world).strip('\n')
-        expected = "4: Pesho of age 20 has 1 rented DVD's (A)\n1: A (February 1254) has age restriction 10. Status: rented"
+        expected = "4: Pesho of age 20 has Test_Worker rented DVD's (A)\nTest_Worker: A (February 1254) has age restriction 10. Status: rented"
         self.assertEqual(actual, expected)
 
 
@@ -157,10 +157,10 @@ if __name__ == "__main__":
 # from project.dvd import DVD
 # from project.movie_world import MovieWorld
 #
-# c1 = Customer("John", 16, 1)
+# c1 = Customer("John", 16, Test_Worker)
 # c2 = Customer("Anna", 55, 2)
 #
-# d1 = DVD("Black Widow", 1, 2020, "April", 18)
+# d1 = DVD("Black Widow", Test_Worker, 2020, "April", 18)
 # d2 = DVD.from_date(2, "The Croods 2", "23.12.2020", 3)
 #
 # movie_world = MovieWorld("The Best Movie Shop")
@@ -171,8 +171,8 @@ if __name__ == "__main__":
 # movie_world.add_dvd(d1)
 # movie_world.add_dvd(d2)
 #
-# print(movie_world.rent_dvd(1, 1))
-# print(movie_world.rent_dvd(2, 1))
-# print(movie_world.rent_dvd(1, 2))
+# print(movie_world.rent_dvd(Test_Worker, Test_Worker))
+# print(movie_world.rent_dvd(2, Test_Worker))
+# print(movie_world.rent_dvd(Test_Worker, 2))
 #
 # print(movie_world)

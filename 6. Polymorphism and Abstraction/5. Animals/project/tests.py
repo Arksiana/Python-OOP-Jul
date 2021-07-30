@@ -53,7 +53,7 @@ class Tests(unittest.TestCase):
 
     def test_kitten_repr(self):
         k = Kitten("Meowy", 1)
-        exp = "This is Meowy. Meowy is a 1 year old Female Kitten"
+        exp = "This is Meowy. Meowy is a Test_Worker year old Female Kitten"
         self.assertEqual(exp, repr(k))
 
     def test_kitten_sound(self):

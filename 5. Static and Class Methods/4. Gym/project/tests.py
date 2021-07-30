@@ -20,7 +20,7 @@ class TestGym(unittest.TestCase):
     def test_customer_repr(self):
         Customer.id = 1
         c = Customer("Pesho", "addr.", "pesho@gmail.com")
-        self.assertEqual(str(c), "Customer <1> Pesho; Address: addr.; Email: pesho@gmail.com")
+        self.assertEqual(str(c), "Customer <Test_Worker> Pesho; Address: addr.; Email: pesho@gmail.com")
 
     def test_equipment_init(self):
         Equipment.id = 1
@@ -31,7 +31,7 @@ class TestGym(unittest.TestCase):
     def test_equipment_repr(self):
         Equipment.id = 1
         e = Equipment("Pesho")
-        self.assertEqual(str(e), "Equipment <1> Pesho")
+        self.assertEqual(str(e), "Equipment <Test_Worker> Pesho")
 
     def test_trainer_init(self):
         Trainer.id = 1
@@ -42,7 +42,7 @@ class TestGym(unittest.TestCase):
     def test_trainer_repr(self):
         Trainer.id = 1
         t = Trainer("Pesho")
-        self.assertEqual(str(t), "Trainer <1> Pesho")
+        self.assertEqual(str(t), "Trainer <Test_Worker> Pesho")
 
     def test_subscription_init(self):
         Subscription.id = 1
@@ -72,7 +72,7 @@ class TestGym(unittest.TestCase):
     def test_plan_repr(self):
         ExercisePlan.id = 1
         p = ExercisePlan(1, 1, 15)
-        self.assertEqual(str(p), "Plan <1> with duration 15 minutes")
+        self.assertEqual(str(p), "Plan <Test_Worker> with duration 15 minutes")
 
     def test_gym_init(self):
         g = Gym()
@@ -137,7 +137,7 @@ class TestGym(unittest.TestCase):
         g.add_plan(p)
         g.add_trainer(t)
         self.assertEqual(g.subscription_info(1),
-                         "Subscription <1> on 10.02.2020\nCustomer <1> Pesho; Address: addr.; Email: pesho@gmail.com\nTrainer <1> Pesho\nEquipment <1> Pesho\nPlan <1> with duration 10 minutes")
+                         "Subscription <Test_Worker> on 10.02.2020\nCustomer <Test_Worker> Pesho; Address: addr.; Email: pesho@gmail.com\nTrainer <Test_Worker> Pesho\nEquipment <Test_Worker> Pesho\nPlan <Test_Worker> with duration 10 minutes")
 
     def test_customer_static_method(self):
         Customer.id = 1
