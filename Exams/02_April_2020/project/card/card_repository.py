@@ -15,7 +15,7 @@ class CardRepository:
 
     def remove(self, card: str):
         if card == '':
-            raise ValueError("Player cannot be an empty string!")
+            raise ValueError("Card cannot be an empty string!")
 
         c_to_remove = self.find(card)
         self.cards.remove(c_to_remove)
