@@ -34,15 +34,21 @@ class TestController(TestCase):
 
     def test_add_magic_card_expect_return_message(self):
         card = MagicCard('Magic Card')
-        result = self.controller.add_card(card.__class__.__name__, card.name)
+        type = 'Magic'
+        result = self.controller.add_card(type, card.name)
 
-        self.assertEqual('Successfully added card of type MagicCardCard with name: Magic Card', result)
+        self.assertEqual('Magic Card', self.controller.card_repository.cards[0].name)
+        self.assertEqual('MagicCard', self.controller.card_repository.cards[0].__class__.__name__)
+        self.assertEqual('Successfully added card of type MagicCard with name: Magic Card', result)
 
     def test_add_trap_card_expect_return_message(self):
         card = TrapCard('Trap Card')
-        result = self.controller.add_card(card.__class__.__name__, card.name)
+        type = 'Trap'
+        result = self.controller.add_card(type, card.name)
 
-        self.assertEqual('Successfully added card of type TrapCardCard with name: Trap Card', result)
+        self.assertEqual('Trap Card', self.controller.card_repository.cards[0].name)
+        self.assertEqual('TrapCard', self.controller.card_repository.cards[0].__class__.__name__)
+        self.assertEqual('Successfully added card of type TrapCard with name: Trap Card', result)
 
     def test_add_player_card_expect_return_message(self):
         player = Beginner('Beginner')

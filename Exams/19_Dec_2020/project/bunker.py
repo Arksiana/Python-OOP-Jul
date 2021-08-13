@@ -1,4 +1,5 @@
 from project.medicine.medicine import Medicine
+from project.medicine.salve import Salve
 from project.supply.food_supply import FoodSupply
 from project.supply.supply import Supply
 from project.supply.water_supply import WaterSupply
